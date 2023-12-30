@@ -1,21 +1,43 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -g -I/home/alper/include
-LDFLAGS =
+ CC = gcc
 
-SRC =  unal3.c
-OBJ = $(SRC:.c=.o)
-TARGET = unal
+CFLAGS = -Wall
+
+
+
+SRC_DIR = src
+
+BUILD_DIR = build
+
+
+
+TARGET = $(BUILD_DIR)/tarsau
+
+
 
 .PHONY: all clean
 
-all: $(TARGET)
 
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+all: $(BUILD_DIR) $(TARGET)
+
+
+
+$(TARGET): $(SRC_DIR)/tarsau.c
+
+        $(CC) $(CFLAGS) $^ -o $@
+
+
+
+$(BUILD_DIR):
+
+        mkdir -p $(BUILD_DIR)
+
+
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+
+        rm -rf $(BUILD_DIR)
+
+
+
 
